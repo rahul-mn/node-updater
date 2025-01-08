@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  nethermind:
+    image: nethermind/nethermind:latest-chiseled
+    container_name: volta-test
+    command: --config=volta --data-dir=/nethermind/data_dir --rpc.addr=0.0.0.0 --rpc.port=8545 --rpc.api=admin,eth,net,web3,personal,debug
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+      - "30303/udp:30303/udp"
+    volumes:
+      - type: bind
+        source: /data-dir
+        target: /nethermind/data_dir
+    networks:
+      - my-network
+  barbosa:
+    build: .  # Build the image from the current directory
+    dockerfile: Dockerfile
+    container_name: test
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Mount the Docker socket
+
+networks:
+  my-network:
