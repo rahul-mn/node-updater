@@ -1,1 +1,1 @@
-# A simple node-updater(barbosa) to automate nethermind version to latest with alerting.
+## A simple node-updater(barbosa) to automate nethermind version upgrade to latest with some alerting.
